@@ -1,0 +1,2 @@
+Mod4 + space
+    setxkbmap -query | grep -q 'ru' && setxkbmap us || setxkbmap ru,us
