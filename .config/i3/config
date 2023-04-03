@@ -22,11 +22,16 @@ set $term --no-startup-id alacritty
 #kitty
 set $mod Mod4
 set $alt Mod1
-set $shutdown sudo -A shutdown -h now
-set $reboot sudo -A reboot
-set $lock i3lock -i /home/snow0w/Images/interstellar.png
-set $suspend sudo systemctl suspend
-set $hibernate sudo -A systemctl hibernate
+set $shutdown  exec --no-startup-id sudo -A shutdown -h now
+set $reboot exec --no-startup-id sudo -A reboot
+set $fast_lock exec --no-startup-id i3lock -i /home/snow0w/Images/interstellar.png
+set $lock exec --no-startup-id dm-tool lock
+set $suspend exec --no-startup-id sudo systemctl suspend
+set $hibernate exec --no-startup-id sudo -A systemctl hibernate
+set $hard_hibernate sudo -A systemctl hibernate
+set $hard_suspend sudo systemctl suspend
+set $fm eDP-1-1
+set $sm HDMI-1-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -40,8 +45,10 @@ gaps outer $outer_gaps
 bindsym $mod+Return 		         exec $term
 bindsym $mod+Shift+Return	       exec $term --working-directory  $(xcwd)
 
-bindsym $mod+Escape	             exec --no-startup-id dm-tool switch-to-greeter
-bindsym $mod+Shift+Escape	       exec --no-startup-id $lock && $hibernate
+bindsym $mod+Escape	             $lock
+bindsym $mod+Delete	             $fast_lock
+# bindsym $mod+Shift+Escape	       exec --no-startup-id $lock && $hibernate
+bindsym $mod+Shift+Escape	       $lock && $hard_hibernate
 
 # bindsym $mod+BackSpace
 # bindsym $mod+Shift+BackSpace	   exec --no-startup-id prompt "Reboot computer?" $reboot
@@ -231,10 +238,10 @@ bindsym $mod+Shift+0	move container to workspace $ws10
 
 # #---Function Buttons---# #
 bindsym $mod+F1		        restart
-bindsym $mod+F2		        exec --no-startup-id $reboot
-bindsym $mod+F3	          exec --no-startup-id $shutdown
-bindsym $mod+F4	          exec --no-startup-id $lock
-bindsym $mod+Insert	          exec --no-startup-id $lock  && $suspend
+bindsym $mod+F2		        $reboot
+bindsym $mod+F3	          $shutdown
+bindsym $mod+F4	          $lock
+bindsym $mod+Insert	      $lock  && $hard_suspend
 bindsym $mod+F12	        exec $term -e nmtui
 
 # #---Arrow Keys---# #

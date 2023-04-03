@@ -9,7 +9,7 @@ vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
 -- configure nvim-tree
 nvimtree.setup({
-	open_on_setup = true,
+	-- open_on_setup = true, --deprecated
 	open_on_tab = true,
 	auto_reload_on_write = true,
 	update_cwd = true,
@@ -18,7 +18,38 @@ nvimtree.setup({
 	renderer = {
 		group_empty = false,
 	},
+	actions = {
+		open_file = {
+			quit_on_open = false,
+			resize_window = true,
+			window_picker = {
+				enable = true,
+				picker = "default",
+				chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+				exclude = {
+					filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+					buftype = { "nofile", "terminal", "help" },
+				},
+			},
+		},
+	},
 })
+
+--Open For Directories And Change Neovim's Directory
+local function open_nvim_tree(data)
+	-- buffer is a directory
+	local directory = vim.fn.isdirectory(data.file) == 1
+
+	if not directory then
+		return
+	end
+
+	-- change to the directory
+	vim.cmd.cd(data.file)
+
+	-- open the tree
+	require("nvim-tree.api").tree.open()
+end
 
 --function for close tabs --not work :(
 --func start ------------------------------------------------------------------------------------------------

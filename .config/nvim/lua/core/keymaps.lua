@@ -46,10 +46,10 @@ keymap.set("n", "<leader>w", ":w!<cr>")
 keymap.set("n", "<leader>q", ":q<cr>")
 
 --size window
-keymap.set("n", "<C-,>", "<C-W><")
-keymap.set("n", "<C-.>", "<C-W>>")
-keymap.set("n", "<C-<>", "<C-W>-")
-keymap.set("n", "<C->>", "<C-W>+")
+keymap.set("n", "<C-Left>", "<C-W><")
+keymap.set("n", "<C-Right>", "<C-W>>")
+keymap.set("n", "<C-Down>", "<C-W>-")
+keymap.set("n", "<C-Up>", "<C-W>+")
 ---------------------
 -- General Keymaps
 ---------------------
@@ -73,7 +73,7 @@ keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available 
 
 --luasnip
 -- vim.cmd('')
---imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
--- vim.api.nvim_set_keymap("s", "<Tab>", "<cmd>lua require('luasnip').jump(1)<Cr>", {})
--- vim.api.nvim_set_keymap("i", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", {})
--- vim.api.nvim_set_keymap("s", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", {})
+-- imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+vim.api.nvim_set_keymap("s", "<Tab>", "<cmd>lua require('luasnip').jump(1)<Cr>", {})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", {})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", {})
