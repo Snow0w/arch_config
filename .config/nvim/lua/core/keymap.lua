@@ -1,6 +1,3 @@
--- set leader key to space
-vim.g.mapleader = " "
-
 local keymap = vim.keymap -- for conciseness
 
 ---------------------
@@ -9,6 +6,9 @@ local keymap = vim.keymap -- for conciseness
 
 -- use jk to exit insert mode
 keymap.set("i", "jk", "<ESC>")
+
+keymap.set("n", "L", "$")
+keymap.set("n", "H", "^")
 
 -- clear search highlights
 keymap.set("n", "<leader><ENTER>", ":nohl<CR>")
@@ -50,8 +50,14 @@ keymap.set("n", "<C-Left>", "<C-W><")
 keymap.set("n", "<C-Right>", "<C-W>>")
 keymap.set("n", "<C-Down>", "<C-W>-")
 keymap.set("n", "<C-Up>", "<C-W>+")
+
+--qlist 
+keymap.set("n", "<leader>l", ":cn<CR>")
+keymap.set("n", "<leader>h", ":cp<CR>")
+
+
 ---------------------
--- General Keymaps
+-- Plugins Keymaps
 ---------------------
 
 -- vim-maximizer
@@ -59,6 +65,7 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window max
 
 --nvim-tree
 keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
+keymap.set("n", "<C-f>", ":NvimTreeFindFile<CR>")
 
 vim.keymap.set("n", "<leader>mn", require("nvim-tree.api").marks.navigate.next)
 vim.keymap.set("n", "<leader>mp", require("nvim-tree.api").marks.navigate.prev)
@@ -66,14 +73,32 @@ vim.keymap.set("n", "<leader>ms", require("nvim-tree.api").marks.navigate.select
 --
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>") -- find files within current working directory, respects .gitignore
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
-keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
+keymap.set("n", "<leader>fl", "<cmd>Telescope live_grep<cr>") -- find string in current working directory as you type
+keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
 
---luasnip
--- vim.cmd('')
--- imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
-vim.api.nvim_set_keymap("s", "<Tab>", "<cmd>lua require('luasnip').jump(1)<Cr>", {})
-vim.api.nvim_set_keymap("i", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", {})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", {})
+-- null_ls
+-- see in null_ls.lua
+
+-- flow
+
+vim.api.nvim_set_keymap('v', '<leader>rf', ':FlowRunFile<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>rr', ':FlowRunLastCmd<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>rp', ':FlowLastOutput<CR>', {})
+vim.api.nvim_set_keymap('n', '<leader>rl', ':FlowLauncher<CR>', {})
+
+-- set custom commands
+-- vim.api.nvim_set_keymap('n', '<leader>R1', ':FlowSetCustomCmd 1<CR>', {})
+-- vim.api.nvim_set_keymap('n', '<leader>R2', ':FlowSetCustomCmd 2<CR>', {})
+-- vim.api.nvim_set_keymap('n', '<leader>R3', ':FlowSetCustomCmd 3<CR>', {})
+
+-- run custom commands
+-- vim.api.nvim_set_keymap('n', '<leader>r1', ':FlowRunCustomCmd 1<CR>', {})
+-- vim.api.nvim_set_keymap('n', '<leader>r2', ':FlowRunCustomCmd 2<CR>', {})
+-- vim.api.nvim_set_keymap('n', '<leader>r3', ':FlowRunCustomCmd 3<CR>', {})
+-- vim.api.nvim_set_keymap('n', '<leader>rp', ':FlowRunLastCmd<CR>', {})
+-- vim.api.nvim_set_keymap('n', '<leader>rp', ':FlowLastOutput<CR>', {})
+
+
+

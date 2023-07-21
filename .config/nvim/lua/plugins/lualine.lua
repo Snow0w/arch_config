@@ -4,3 +4,4 @@ if not status then
 end
 
 lualine.setup()
+

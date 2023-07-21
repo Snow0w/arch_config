@@ -24,7 +24,7 @@ set $mod Mod4
 set $alt Mod1
 set $shutdown  exec --no-startup-id sudo -A shutdown -h now
 set $reboot exec --no-startup-id sudo -A reboot
-set $fast_lock exec --no-startup-id i3lock -i /home/snow0w/Images/interstellar.png
+set $fast_lock exec --no-startup-id brillo -q -U 40 ; exec --no-startup-id "i3lock -i /home/snow0w/Images/interstellar.png -n;  brillo -q -A 50" 
 set $lock exec --no-startup-id dm-tool lock
 set $suspend exec --no-startup-id sudo systemctl suspend
 set $hibernate exec --no-startup-id sudo -A systemctl hibernate
@@ -140,10 +140,10 @@ bindsym $mod+l			            focus right
 bindsym $mod+Shift+l		        move right 30
 bindsym $mod+Ctrl+l		          move workspace to output right
 
-bindsym $mod+semicolon 			    exec --no-startup-id skippy-xd
+# bindsym $mod+semicolon 			    exec --no-startup-id skippy-xd
 
 # z
-bindsym $mod+z			            exec --no-startup-id $term -e nvim ~/.zshrc
+# bindsym $mod+z			            exec --no-startup-id $term -e nvim ~/.zshrc
 
 # x
 bindsym $mod+x                   layout toggle splith tabbed
@@ -174,10 +174,32 @@ bindsym $mod+Shift+m		        exec --no-startup-id discord
 # bindsym $mod+Tab		            exec --no-startup-id rofi-menu-windows
 bindsym $mod+Tab		            workspace next
 bindsym $mod+Shift+Tab		      workspace prev
-bindsym $mod+apostrophe		      split horizontal ;; exec $term
-bindsym $mod+slash		          split vertical ;; exec $term
+bindsym $mod+apostrophe		      split horizontal ;; exec $term --working-directory  $(xcwd)
+bindsym $mod+slash		          split vertical ;; exec $term --working-directory  $(xcwd)
 bindsym $mod+Shift+slash	      kill
 bindsym $mod+backslash		      workspace back_and_forth
+
+workspace 1 output $fm
+workspace 2 output $fm
+workspace 3 output $fm
+workspace 4 output $fm
+workspace 5 output $fm
+workspace 6 output $fm
+workspace 7 output $fm
+workspace 8 output $fm
+workspace 9 output $fm
+workspace 10 output $fm
+
+workspace 11 output $sm
+workspace 12 output $sm
+workspace 13 output $sm
+workspace 14 output $sm
+workspace 15 output $sm
+workspace 16 output $sm
+workspace 16 output $sm
+workspace 17 output $sm
+workspace 18 output $sm
+workspace 19 output $sm
 
 set $ws1 "1"
 set $ws2 "2"
@@ -189,6 +211,15 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
 
 # Assign Workspaces:
 # assign [class="Brave"] $ws1
@@ -218,6 +249,16 @@ bindsym $mod+8		workspace $ws8
 bindsym $mod+9		workspace $ws9
 bindsym $mod+0		workspace $ws10
 
+bindsym $mod+$alt+1		workspace $ws11
+bindsym $mod+$alt+2		workspace $ws12
+bindsym $mod+$alt+3		workspace $ws13
+bindsym $mod+$alt+4		workspace $ws14
+bindsym $mod+$alt+5		workspace $ws15
+bindsym $mod+$alt+6		workspace $ws16
+bindsym $mod+$alt+7		workspace $ws17
+bindsym $mod+$alt+8		workspace $ws18
+bindsym $mod+$alt+9		workspace $ws19
+
 # move focused container to workspace
 bindsym $mod+Shift+1	move container to workspace $ws1
 bindsym $mod+Shift+2	move container to workspace $ws2
@@ -229,6 +270,16 @@ bindsym $mod+Shift+7	move container to workspace $ws7
 bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
+
+bindsym $mod+$alt+Shift+1	move container to workspace $ws11
+bindsym $mod+$alt+Shift+2	move container to workspace $ws12
+bindsym $mod+$alt+Shift+3	move container to workspace $ws13
+bindsym $mod+$alt+Shift+4	move container to workspace $ws14
+bindsym $mod+$alt+Shift+5	move container to workspace $ws15
+bindsym $mod+$alt+Shift+6	move container to workspace $ws16
+bindsym $mod+$alt+Shift+7	move container to workspace $ws17
+bindsym $mod+$alt+Shift+8	move container to workspace $ws18
+bindsym $mod+$alt+Shift+9	move container to workspace $ws19
 
 # for_window [title="GIMP Startup"] move workspace $ws5
 # for_window [class="Gimp"] move workspace $ws5
@@ -247,16 +298,20 @@ bindsym $mod+F12	        exec $term -e nmtui
 # #---Arrow Keys---# #
 bindsym $mod+Left		      focus left
 bindsym $mod+Shift+Left   resize shrink width 5 px or 5 ppt
-bindsym $mod+Ctrl+Left		move workspace to output right
+# bindsym $mod+Ctrl+Left		move workspace to output right
+bindsym $mod+Ctrl+Left		move right
 bindsym $mod+Down		      focus down
 bindsym $mod+Shift+Down   resize shrink height 5 px or 5 ppt
-bindsym $mod+Ctrl+Down		move workspace to output up
+# bindsym $mod+Ctrl+Down		move workspace to output up
+bindsym $mod+Ctrl+Down		move up
 bindsym $mod+Up			      focus up
 bindsym $mod+Shift+Up     resize grow height 5 px or 5 ppt
-bindsym $mod+Ctrl+Up		  move workspace to output down
+# bindsym $mod+Ctrl+Up		  move workspace to output down
+bindsym $mod+Ctrl+Up		  move down
 bindsym $mod+Right 		    focus right
 bindsym $mod+Shift+Right  resize grow width 5 px or 5 ppt
-bindsym $mod+Ctrl+Right		move workspace to output left
+# bindsym $mod+Ctrl+Right		move workspace to output left
+bindsym $mod+Ctrl+Right		move left
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% #increase sound volume
